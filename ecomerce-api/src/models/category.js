@@ -1,28 +1,28 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const categorySchema=new mongoose.Schema({
-    name:{
-        type:String,
-    },
-    description:{
-        type:String,
-        require:true,
-        trim:true,
-    },
-    imageURL:{
-        type:String,
-        trim:true,
-        default:'https://placehold.co/800x600.png',
-    },
-    parentCategory:{
-        type:Schema.Types.ObjectId,
-        ref:'Category',
-        default:null,
-    }
-
-
+const categorySchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  imageURL: {
+    type: String,
+    trim: true,
+    default: 'https://placehold.co/800x600.png',
+  },
+  parentCategory: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    default: null,
+  }
 });
 
-const category = mongoose.model('category',categorySchema);
+const Category = mongoose.model('Category', categorySchema);
 
-module.exports = category;
+export default Category;

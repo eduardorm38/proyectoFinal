@@ -14,37 +14,31 @@ const userSchema=new mongoose.Schema({
       'Por favor ingresa un email válido'
     ]
     },
-    hashPasword:{
-        type:String,
-        required:true,
-        trim:true
-    },
-    role:{
-        type:String,
-        required:true,
-        trim:true,
-        enum:['admin','customer','guest']
-    },
-    phone:{
-        type:String,
-        required:true,
-        trim:true,
-        max:10
-    },
-    avatar:{
-        type:String,
-        required:true,
-        trim:true,
-        default:'https://placehold.co/800x600.png'
-    },
-    isActive:{
-        type:Boolean,
-        default:true
-    }
-
-
+    hashPassword: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    required: true,
+    enum: ['admin', 'customer', 'guest'],
+  },
+  avatar: {
+    type: String,
+    required: true,
+    default: 'https://placehold.co/100x100.png',
+  },
+  phone: {
+    type: String,
+    required: true,
+    max: 10,
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
 });
 
-const User = mongoose.model('user',userSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;
