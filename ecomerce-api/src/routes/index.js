@@ -1,6 +1,7 @@
 
 import express from 'express';
 
+import authRoutes from './authRoutes.js';
 import cartRoutes from './cartRoutes.js';
 import categoryRoutes from './categoryRoutes.js';
 import notificationRoutes from './notificationRoutes.js';
