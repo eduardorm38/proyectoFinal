@@ -2,8 +2,30 @@ import Product from '../models/product.js';
 
 async function getProducts(req, res) {
   try {
-    const products = await Product.find().sort({ name: 1 });
-    res.json(products);
+    const page = parseInt(req.query.page)|| 1;
+    const limit = parseInt(req.query.limit)||10;
+    const skip =(page-1)*limit;
+
+
+    const products = await Product.find()
+    .populate('category')
+    .skip(skip)
+    .limit(limit)
+    .sort({ name: 1 });
+
+    const totalResults = await Product.countDocuments();
+    const totalPages =Math.ceil(totalResults/limit);
+
+    res.json({products,
+      pagination:{
+        currentPage: page,
+        totalPages,
+        totalResults,
+        hasNext: page<totalPages,
+        hasPrev: page>1,
+      }
+
+    });
   } catch (error) {
     res.status(500).send({ error });
   }
